@@ -1,6 +1,6 @@
 const request = require('request')
 
-const geoCode = (address, callback) => {
+const geocode = (address, callback) => {
     const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'+encodeURIComponent(address)+'.json?access_token=pk.eyJ1Ijoic291bXlhZGVlcDEzOTciLCJhIjoiY2t1c2RoM3dyMDk2NTJ3bHR3bHNiZDE1NiJ9.3vn3lrgeI1-AbgfYvIV3jw'
 
     // request({url: url, json:true},(error, response) => {
@@ -18,7 +18,9 @@ const geoCode = (address, callback) => {
     // })
 
     request({url, json:true},(error, {body}) => {
+        //console.log(response)
         if(error){
+           // console.log(error)
             callback('Unable to connect to location services')
         }else if (body.features.length === 0){
             callback('Unable to find coordinates. Please try with different search place')
@@ -32,4 +34,4 @@ const geoCode = (address, callback) => {
     })
 }
 
-module.exports = geoCode
+module.exports = geocode
